@@ -37,6 +37,7 @@ module.exports = {
 				address,
 				password,
 			});
+			
 			if (
 				!username ||
 				!fullname ||
@@ -57,7 +58,9 @@ module.exports = {
 
 			res.status(200).send(useer);
 		} catch (error) {
-			res.status(404).json({ message: "error", error: "error" });
+			console.log(error);
+			// res.status(404).json({ message: "error", error: "error" });
+			res.status(404).json(error);
 		}
 	},
 	login_a_user: async (req, res) => {
