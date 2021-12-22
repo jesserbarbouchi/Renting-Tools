@@ -55,18 +55,23 @@ export default {
     name:"Login",
     data(){
         return {
-            email:'',
+            email:"",
             password:""
         }
     },
     methods:{
         async handleSubmit(){
-            var response = await Axios.post('http://localhost:5000/login',{
-                email:this.email,
-                password:this.password
-            })
+           var data={
+               email:this.email,
+               password:this.password
+           }
+           console.log("clog login data",data);
+            var response = await Axios.post('http://localhost:5000/users/login',data)
             console.log("response",response);
             localStorage.setItem('token',response.data.token)
+            localStorage.setItem('session',response.data.user._id)
+            console.log("id",response.data.user._id);
+            this.$router.push("/")
         }
     }
 }

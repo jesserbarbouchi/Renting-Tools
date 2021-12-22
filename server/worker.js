@@ -140,7 +140,7 @@ const addUsers = async (list) => {
 	}
 };
 
-// addUsers(users);
+addUsers(users);
 
 let usersdata = [
 	{
@@ -566,4 +566,4 @@ let tools = [
 
 const addTools = (list) => Tool.insertMany(list);
 
-addTools(tools);
+// addTools(tools);
