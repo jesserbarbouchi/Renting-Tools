@@ -1,7 +1,6 @@
 <template>
 
   <div class="usersListContainer">
-    <h1>helooooooooo</h1>
     <div v-for="user in users" :key="user._id">
       <div class="container">
         <div class="row">
