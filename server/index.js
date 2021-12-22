@@ -73,7 +73,7 @@ app.use("/admin", admin);
 app.use("/tools", tools);
 
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://localhost:27017/rentingTools");
+mongoose.connect("mongodb://localhost:27017/rentingTools").then(res => console.log("mongoose connected !"));
 app.listen(port, function () {
 	console.log(`listening on port http://localhost:${port} !`);
 });

@@ -27,14 +27,14 @@ module.exports = {
 				email,
 				phone_number,
 				password,
-				adrress,
+				address,
 			} = req.body;
 			const user = new User({
 				username,
 				fullname,
 				email,
 				phone_number,
-				adrress,
+				address,
 				password,
 			});
 			if (
@@ -43,7 +43,7 @@ module.exports = {
 				!email ||
 				!phone_number ||
 				!password ||
-				!adrress
+				!address
 			)
 				return res
 					.status(400)
