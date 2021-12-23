@@ -74,6 +74,7 @@
         </form>
       </div>
     </div>
+    <Checkout/>
   </div>
 </template>
 
@@ -86,8 +87,10 @@
 </style>
 
 <script>
+import Checkout from "./Checkout.vue"
 import Axios from "axios";
 export default {
+   components: { Checkout },
   name: "Signup",
   data() {
     return {
@@ -101,15 +104,17 @@ export default {
     }}
   },
   methods: {
+    sendMail(){
+      Axios.post("http://localhost:5000/users/f",{email:this.data.email})
+      .then(()=>{console.log("email",this.data.email);})
+    },
     handleSubmit() {
         var data =this.data
-         console.log(data);
-      Axios.post("http://localhost:5000/users/signup", data
-        
-      )
-     
+         console.log("data",data);
+      Axios.post("http://localhost:5000/users/signup", data)
       .then(response=>{console.log("response",response.config.data);})
-      .catch(error=>{console.log(error);})
+      .then(()=>{this.sendMail()})
+      .catch(error=>{console.log("this is an error",error);})
       this.$router.push('/login')
     },
 //     fetchData(){
