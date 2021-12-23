@@ -140,7 +140,7 @@ const addUsers = async (list) => {
 	}
 };
 
-// addUsers(users);
+addUsers(users);
 
 let usersdata = [
 {
