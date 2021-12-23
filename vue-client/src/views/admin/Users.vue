@@ -2,17 +2,20 @@
   <div class="container mt-2">
     <button @click="created">kkkkkkkkkkkkkkkkkkkkkkkkkkk</button>
 
-  <div class="row">
-    <div class="col-md-3 col-sm-6">
-      <div class="card card-block">
-      <h4 class="card-title text-right"><i class="material-icons">settings</i></h4>
-      
-    <!-- <img src= {{user. profile_image_uri}} alt="Photo of sunset"> -->
+    <div class="row">
+      <div class="col-md-3 col-sm-6">
+        <div class="card card-block">
+          <h4 class="card-title text-right">
+            <i class="material-icons">settings</i>
+          </h4>
 
-        <h5 class="card-title mt-3 mb-3">{{user.fullname}}</h5>
-        <h5 class="card-title mt-3 mb-3">{{user.email}}</h5>
-        <h5 class="card-title mt-3 mb-3">{{user.phone_number}}</h5>
-  </div>
+          <!-- <img src= {{user. profile_image_uri}} alt="Photo of sunset"> -->
+
+          <h5 class="card-title mt-3 mb-3">{{ user.fullname }}</h5>
+          <h5 class="card-title mt-3 mb-3">{{ user.email }}</h5>
+          <h5 class="card-title mt-3 mb-3">{{ user.phone_number }}</h5>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -23,9 +26,8 @@ export default {
   name: "Users",
   data() {
     return {
-      users:[]
-
-      }
+      users: [],
+    };
   },
   methods: {
     async created() {
@@ -41,11 +43,9 @@ export default {
 </script>
 
 <style>
-
-
-img{
-  height:150px;
-  width:100%;
+img {
+  height: 150px;
+  width: 100%;
 }
 
 div [class^="col-"] {
@@ -68,10 +68,9 @@ div [class^="col-"] {
   color: #ffa710;
 }
 
-.card-title i:hover{
-  transform: scale(1.25) rotate(100deg); 
-  color:#18d4ca;
-  
+.card-title i:hover {
+  transform: scale(1.25) rotate(100deg);
+  color: #18d4ca;
 }
 .card:hover {
   transform: scale(1.05);

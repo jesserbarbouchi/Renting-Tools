@@ -10,23 +10,21 @@ import Auth from "@/layouts/Auth.vue";
 
 import Login from "@/views/auth/Login.vue";
 import Signup from "@/views/auth/Signup.vue";
-import profile from "@/views/Profile.vue"
+import profile from "@/views/Profile.vue";
 
 import Landing from "@/views/Landing.vue";
+import LoginAdmin from "@/views/admin/LoginAdmin.vue";
+import Users from "@/views/admin/Users.vue";
 
 const routes = [
- 
-      {
-        path: "/users",
-        component:Users
-      },
-      {
-        path: "/admin/login",
-        component: LoginAdmin
-      },
-      
-    
-  
+  {
+    path: "/users",
+    component: Users,
+  },
+  {
+    path: "/admin/login",
+    component: LoginAdmin,
+  },
 
   {
     path: "/auth",
@@ -49,9 +47,9 @@ const routes = [
     component: Landing,
   },
   {
-    path : "/profile",
-    component : profile
-  }
+    path: "/profile",
+    component: profile,
+  },
 ];
 
 const router = createRouter({
