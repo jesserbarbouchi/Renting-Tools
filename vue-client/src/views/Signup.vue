@@ -45,22 +45,22 @@
             placeholder="Your Email"
             type="email"
           />
-            <input
-                class="form-control"
-                name="phone_number"
-                v-model="this.data.phone_number"
-                placeholder="phone_number"
-                type="text"
-                required
-              />
-                    <input
-                class="form-control"
-                name="address"
-                v-model="this.data.address"
-                placeholder="address"
-                type="text"
-                required
-              />
+          <input
+            class="form-control"
+            name="phone_number"
+            v-model="this.data.phone_number"
+            placeholder="phone_number"
+            type="text"
+            required
+          />
+          <input
+            class="form-control"
+            name="address"
+            v-model="this.data.address"
+            placeholder="address"
+            type="text"
+            required
+          />
           <input
             class="form-control"
             name="password"
@@ -68,7 +68,11 @@
             placeholder="password"
             type="password"
           />
-          <button class="btn btn-lg btn-primary btn-block" v-on:click="handleSubmit" type="submit">
+          <button
+            class="btn btn-lg btn-primary btn-block"
+            v-on:click="handleSubmit"
+            type="submit"
+          >
             Sign up
           </button>
         </form>
@@ -87,49 +91,59 @@
 </style>
 
 <script>
-import Checkout from "./Checkout.vue"
+import Checkout from "./Checkout.vue";
 import Axios from "axios";
 export default {
-   components: { Checkout },
+  components: { Checkout  },
   name: "Signup",
   data() {
     return {
-  data:{ 
-   username    :"",
-	 fullname    :"",
-	 email       :"",
-	 phone_number:"",
-	 password    :"",
-	 address     :"",
-    }}
+      data: {
+        username: "",
+        fullname: "",
+        email: "",
+        phone_number: "",
+        password: "",
+        address: "",
+      },
+    };
   },
   methods: {
-    sendMail(){
-      Axios.post("http://localhost:5000/users/f",{email:this.data.email})
-      .then(()=>{console.log("email",this.data.email);})
+    sendMail() {
+      Axios.post("http://localhost:5000/users/f", {
+        email: this.data.email,
+      }).then(() => {
+        console.log("email", this.data.email);
+      });
     },
     handleSubmit() {
-        var data =this.data
-         console.log("data",data);
+      var data = this.data;
+      console.log("data", data);
       Axios.post("http://localhost:5000/users/signup", data)
-      .then(response=>{console.log("response",response.config.data);})
-      .then(()=>{this.sendMail()})
-      .catch(error=>{console.log("this is an error",error);})
-      this.$router.push('/login')
+        .then((response) => {
+          console.log("response", response.config.data);
+        })
+        .then(() => {
+          this.sendMail();
+        })
+        .catch((error) => {
+          console.log("this is an error", error);
+        });
+      this.$router.push("/login");
     },
-//     fetchData(){
-//              var data ={
-// fullname   : this.fullname,
-//         username   : this.username,
-//         email      : this.email,
-//         phone_number: this.phone_number,
-//         address    : this.address,
-//         password   :this.password
-//         }
-//         Axios.get("http://localhost:5000/signup",{data})
-//         .then(response=>{console.log("response",response);})
-//         .catch(error=>{console.log("this error",error);})
-//     }
+    //     fetchData(){
+    //              var data ={
+    // fullname   : this.fullname,
+    //         username   : this.username,
+    //         email      : this.email,
+    //         phone_number: this.phone_number,
+    //         address    : this.address,
+    //         password   :this.password
+    //         }
+    //         Axios.get("http://localhost:5000/signup",{data})
+    //         .then(response=>{console.log("response",response);})
+    //         .catch(error=>{console.log("this error",error);})
+    //     }
   },
 };
 </script>
