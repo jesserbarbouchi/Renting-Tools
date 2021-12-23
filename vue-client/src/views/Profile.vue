@@ -306,13 +306,11 @@ export default {
     editeProfile() {
       //  var user =  JSON.parse(localstorage.getItem("session"))._id
       //  var url =`http://localhost/5000/profile/update${id}`
-    
     },
     previewimage(e) {
       this.imageData = e.target.files[0].name;
       this.picture = null;
       this.uploadValue = 0;
-   
     },
   },
 };
@@ -322,10 +320,4 @@ export default {
 
 <style></style>
 
-
-
-
-
-<style>
-
-</style>
+<style></style>
