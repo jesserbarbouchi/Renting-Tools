@@ -10,6 +10,7 @@
       <h4 class="card-title text-right"><i class="material-icons">settings</i></h4>
       
     <!-- <img src= {{user. profile_image_uri}} alt="Photo of sunset"> -->
+
         <h5 class="card-title mt-3 mb-3">{{user.fullname}}</h5>
         <h5 class="card-title mt-3 mb-3">{{user.email}}</h5>
         <h5 class="card-title mt-3 mb-3">{{user.phone_number}}</h5>
@@ -30,6 +31,7 @@ export default {
   data() {
     return {
       users:[]
+
       }
   },
   methods: {
@@ -47,6 +49,7 @@ export default {
 </script>
 
 <style>
+
 
 img{
   height:150px;
