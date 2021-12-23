@@ -12,7 +12,7 @@
         <router-link to="/auth/login">Log in</router-link>
       </li>
       <li>
-        <router-link to="/auth/register">Sign in</router-link>
+        <router-link to="/auth/signup">Sign in</router-link>
       </li>
     </ul>
   </nav>
