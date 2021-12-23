@@ -1,143 +1,143 @@
-const User = require("./models/users.js");
-const Tool = require("./models/tools.js");
+const User = require("./models/user.js");
+const Tool = require("./models/Tool.js");
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://localhost:27017/rentingTools");
 let users = [
-	{
-		username: "Souha",
-		fullname: "Souha gharbi",
-		email: "souha_gharbi@gmail.com",
-		phone_number: "55699884",
-		password: "123azerty",
-		profile_image_uri:
-			"https://media.istockphoto.com/photos/pleasant-young-indian-woman-freelancer-consult-client-via-video-call-picture-id1300972573?b=1&k=20&m=1300972573&s=170667a&w=0&h=xuAsEkMkoBbc5Nh-nButyq3DU297V_tnak-60VarrR0=",
-	},
-	{
-		username: "#Sabri",
-		fullname: "Sabri hamadi",
-		email: "sabri@gmail.com",
-		phone_number: "26355894",
-		password: "sabri1234",
-		profile_image_uri:
-			"https://media.istockphoto.com/photos/middle-age-man-portrait-picture-id1285124274?b=1&k=20&m=1285124274&s=170667a&w=0&h=tdCWjbu8NxR_vhU3Tri7mZcfUH6WdcYWS1aurF4bbKI=",
-	},
-	{
-		username: "@Aicha_15",
-		fullname: "Aicha hamzaoui",
-		email: "aicha@yahoo.com",
-		phone_number: "93665887",
-		password: "aicha1234",
-		profile_image_uri:
-			"https://media.istockphoto.com/photos/one-beautiful-woman-looking-at-the-camera-in-profile-picture-id1303539316?b=1&k=20&m=1303539316&s=170667a&w=0&h=ePGGvjsOR__-R2KSvZ67xXl2x-CkVzKg8q_WtvqLww0=",
-	},
-	{
-		username: "Sami_666",
-		fullname: "Sami hamami",
-		email: "sami@hotmail.com",
-		phone_number: "56889944",
-		password: "samiiii1234",
-		profile_image_uri:
-			"https://media.istockphoto.com/photos/headshot-portrait-of-smiling-ethnic-businessman-in-office-picture-id1300512215?b=1&k=20&m=1300512215&s=170667a&w=0&h=LsZL_-vvAHB2A2sNLHu9Vpoib_3aLLkRamveVW3AGeQ=",
-	},
-	{
-		username: "=>>Ahmed<<==",
-		fullname: "Ahmed ksouri",
-		email: "ksouri_ahmed@yahoo.com",
-		phone_number: "23669587",
-		password: "ahmed1234",
-		profile_image_uri:
-			"https://media.istockphoto.com/photos/headshot-portrait-of-smiling-male-employee-in-office-picture-id1309328823?b=1&k=20&m=1309328823&s=170667a&w=0&h=a-f8vR5TDFnkMY5poQXfQhDSnK1iImIfgVTVpFZi_KU=",
-	},
-	{
-		username: "Khlifa",
-		fullname: "Khlifa khriji",
-		email: "khlifa@gmail.com",
-		phone_number: "23448953",
-		password: "khlifa1234",
-		profile_image_uri:
-			"https://media.istockphoto.com/photos/millennial-male-team-leader-organize-virtual-workshop-with-employees-picture-id1300972574?b=1&k=20&m=1300972574&s=170667a&w=0&h=2nBGC7tr0kWIU8zRQ3dMg-C5JLo9H2sNUuDjQ5mlYfo=",
-	},
-	{
-		username: "Linda",
-		fullname: "Linda farza",
-		email: "linda@gmail.com",
-		phone_number: "25663314",
-		password: "linda1234",
-		profile_image_uri:
-			"https://media.istockphoto.com/photos/headshot-studio-portrait-of-a-woman-in-profile-looking-at-the-camera-picture-id1305462732?b=1&k=20&m=1305462732&s=170667a&w=0&h=PrX1YvXLF8QwgvTmcqG6BFqe9ugwNb_rtsLi38R9pFs=",
-	},
-	{
-		username: "Fadhila",
-		fullname: "Fadhila meziti",
-		email: "fadhika@gmail.com",
-		phone_number: "99665544",
-		password: "fadhila1234",
-		profile_image_uri:
-			"https://media.istockphoto.com/photos/overjoyed-pretty-asian-woman-look-at-camera-with-sincere-laughter-picture-id1311084168?b=1&k=20&m=1311084168&s=170667a&w=0&h=mE8BgXPgcHO1UjSmdWYa21NIKDzJvMrjOffy39Ritpo=",
-	},
-	{
-		username: "Zaineb",
-		fullname: "Zaineb saidii",
-		email: "zaynab@hotmail.com",
-		phone_number: "21338899",
-		password: "zaynab1234",
-		profile_image_uri:
-			"https://media.istockphoto.com/photos/positive-mindset-positive-life-picture-id1272765753?b=1&k=20&m=1272765753&s=170667a&w=0&h=8Twyimx9TOKgr67OrabNA5sUeEgYT7ckM5HU6fnL5Ik=",
-	},
-	{
-		username: "!Badis",
-		fullname: "Badis karma",
-		email: "badis@gmail.com",
-		phone_number: "96312543",
-		password: "badis1234",
-		profile_image_uri:
-			"https://media.istockphoto.com/photos/young-man-with-backpack-taking-selfie-portrait-on-a-mountain-smiling-picture-id1329031407?b=1&k=20&m=1329031407&s=170667a&w=0&h=J6qRqj9hbKtSVwIfMJhcRXf3AEyAOshph2IAbPHwNUo=",
-	},
-	{
-		username: "Nadine",
-		fullname: "nadine warka",
-		email: "nadine@gmail.com",
-		phone_number: "22336655",
-		password: "nadine1234",
-		profile_image_uri:
-			"https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8d29tYW58ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60",
-	},
-	{
-		username: "Jamila",
-		fullname: "jamila madyouni",
-		email: "jamila@yahoo.com",
-		phone_number: "21457896",
-		password: "jamila1234",
-		profile_image_uri:
-			"https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8d29tYW58ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60",
-	},
-	{
-		username: "@Mohamed_ali",
-		fullname: "mohamed ali nour",
-		email: "ali_nour@gmail.com",
-		phone_number: "25663384",
-		password: "medali1234",
-		profile_image_uri:
-			"https://media.istockphoto.com/photos/young-man-is-playing-with-a-dog-and-do-selfie-picture-id1300658241?b=1&k=20&m=1300658241&s=170667a&w=0&h=0lrTViinfnDjbWDgxV0TDDSAXvzSgmrN-pKq0q60hqA=",
-	},
-	{
-		username: "Mahmoud",
-		fullname: "mahmoud bouAli",
-		email: "mahmoud_1235@gmail.com",
-		phone_number: "55996332",
-		password: "mahmoud1234",
-		profile_image_uri:
-			"https://images.unsplash.com/photo-1557862921-37829c790f19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bWFufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=900&q=60",
-	},
+  {
+    username: "Souha",
+    fullname: "Souha gharbi",
+    email: "souha_gharbi@gmail.com",
+    phone_number: "55699884",
+    password: "123azerty",
+    profile_image_uri:
+      "https://media.istockphoto.com/photos/pleasant-young-indian-woman-freelancer-consult-client-via-video-call-picture-id1300972573?b=1&k=20&m=1300972573&s=170667a&w=0&h=xuAsEkMkoBbc5Nh-nButyq3DU297V_tnak-60VarrR0=",
+  },
+  {
+    username: "#Sabri",
+    fullname: "Sabri hamadi",
+    email: "sabri@gmail.com",
+    phone_number: "26355894",
+    password: "sabri1234",
+    profile_image_uri:
+      "https://media.istockphoto.com/photos/middle-age-man-portrait-picture-id1285124274?b=1&k=20&m=1285124274&s=170667a&w=0&h=tdCWjbu8NxR_vhU3Tri7mZcfUH6WdcYWS1aurF4bbKI=",
+  },
+  {
+    username: "@Aicha_15",
+    fullname: "Aicha hamzaoui",
+    email: "aicha@yahoo.com",
+    phone_number: "93665887",
+    password: "aicha1234",
+    profile_image_uri:
+      "https://media.istockphoto.com/photos/one-beautiful-woman-looking-at-the-camera-in-profile-picture-id1303539316?b=1&k=20&m=1303539316&s=170667a&w=0&h=ePGGvjsOR__-R2KSvZ67xXl2x-CkVzKg8q_WtvqLww0=",
+  },
+  {
+    username: "Sami_666",
+    fullname: "Sami hamami",
+    email: "sami@hotmail.com",
+    phone_number: "56889944",
+    password: "samiiii1234",
+    profile_image_uri:
+      "https://media.istockphoto.com/photos/headshot-portrait-of-smiling-ethnic-businessman-in-office-picture-id1300512215?b=1&k=20&m=1300512215&s=170667a&w=0&h=LsZL_-vvAHB2A2sNLHu9Vpoib_3aLLkRamveVW3AGeQ=",
+  },
+  {
+    username: "=>>Ahmed<<==",
+    fullname: "Ahmed ksouri",
+    email: "ksouri_ahmed@yahoo.com",
+    phone_number: "23669587",
+    password: "ahmed1234",
+    profile_image_uri:
+      "https://media.istockphoto.com/photos/headshot-portrait-of-smiling-male-employee-in-office-picture-id1309328823?b=1&k=20&m=1309328823&s=170667a&w=0&h=a-f8vR5TDFnkMY5poQXfQhDSnK1iImIfgVTVpFZi_KU=",
+  },
+  {
+    username: "Khlifa",
+    fullname: "Khlifa khriji",
+    email: "khlifa@gmail.com",
+    phone_number: "23448953",
+    password: "khlifa1234",
+    profile_image_uri:
+      "https://media.istockphoto.com/photos/millennial-male-team-leader-organize-virtual-workshop-with-employees-picture-id1300972574?b=1&k=20&m=1300972574&s=170667a&w=0&h=2nBGC7tr0kWIU8zRQ3dMg-C5JLo9H2sNUuDjQ5mlYfo=",
+  },
+  {
+    username: "Linda",
+    fullname: "Linda farza",
+    email: "linda@gmail.com",
+    phone_number: "25663314",
+    password: "linda1234",
+    profile_image_uri:
+      "https://media.istockphoto.com/photos/headshot-studio-portrait-of-a-woman-in-profile-looking-at-the-camera-picture-id1305462732?b=1&k=20&m=1305462732&s=170667a&w=0&h=PrX1YvXLF8QwgvTmcqG6BFqe9ugwNb_rtsLi38R9pFs=",
+  },
+  {
+    username: "Fadhila",
+    fullname: "Fadhila meziti",
+    email: "fadhika@gmail.com",
+    phone_number: "99665544",
+    password: "fadhila1234",
+    profile_image_uri:
+      "https://media.istockphoto.com/photos/overjoyed-pretty-asian-woman-look-at-camera-with-sincere-laughter-picture-id1311084168?b=1&k=20&m=1311084168&s=170667a&w=0&h=mE8BgXPgcHO1UjSmdWYa21NIKDzJvMrjOffy39Ritpo=",
+  },
+  {
+    username: "Zaineb",
+    fullname: "Zaineb saidii",
+    email: "zaynab@hotmail.com",
+    phone_number: "21338899",
+    password: "zaynab1234",
+    profile_image_uri:
+      "https://media.istockphoto.com/photos/positive-mindset-positive-life-picture-id1272765753?b=1&k=20&m=1272765753&s=170667a&w=0&h=8Twyimx9TOKgr67OrabNA5sUeEgYT7ckM5HU6fnL5Ik=",
+  },
+  {
+    username: "!Badis",
+    fullname: "Badis karma",
+    email: "badis@gmail.com",
+    phone_number: "96312543",
+    password: "badis1234",
+    profile_image_uri:
+      "https://media.istockphoto.com/photos/young-man-with-backpack-taking-selfie-portrait-on-a-mountain-smiling-picture-id1329031407?b=1&k=20&m=1329031407&s=170667a&w=0&h=J6qRqj9hbKtSVwIfMJhcRXf3AEyAOshph2IAbPHwNUo=",
+  },
+  {
+    username: "Nadine",
+    fullname: "nadine warka",
+    email: "nadine@gmail.com",
+    phone_number: "22336655",
+    password: "nadine1234",
+    profile_image_uri:
+      "https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8d29tYW58ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60",
+  },
+  {
+    username: "Jamila",
+    fullname: "jamila madyouni",
+    email: "jamila@yahoo.com",
+    phone_number: "21457896",
+    password: "jamila1234",
+    profile_image_uri:
+      "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8d29tYW58ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60",
+  },
+  {
+    username: "@Mohamed_ali",
+    fullname: "mohamed ali nour",
+    email: "ali_nour@gmail.com",
+    phone_number: "25663384",
+    password: "medali1234",
+    profile_image_uri:
+      "https://media.istockphoto.com/photos/young-man-is-playing-with-a-dog-and-do-selfie-picture-id1300658241?b=1&k=20&m=1300658241&s=170667a&w=0&h=0lrTViinfnDjbWDgxV0TDDSAXvzSgmrN-pKq0q60hqA=",
+  },
+  {
+    username: "Mahmoud",
+    fullname: "mahmoud bouAli",
+    email: "mahmoud_1235@gmail.com",
+    phone_number: "55996332",
+    password: "mahmoud1234",
+    profile_image_uri:
+      "https://images.unsplash.com/photo-1557862921-37829c790f19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bWFufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=900&q=60",
+  },
 ];
 
 const addUsers = async (list) => {
-	for (let i = 0; i < list.length; i++) {
-		let user = new User(list[i]);
-		let doc = await user.save();
-		console.log(doc);
-	}
+  for (let i = 0; i < list.length; i++) {
+    let user = new User(list[i]);
+    let doc = await user.save();
+    console.log(doc);
+  }
 };
 
 addUsers(users);
@@ -566,5 +566,9 @@ let usersdata = [
 // ];
 
 // const addTools = (list) => Tool.insertMany(list);
+
+if (users && addUsers && categories) {
+  console.log();
+}
 
 // addTools(tools);
