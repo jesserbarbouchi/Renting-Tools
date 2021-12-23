@@ -1,7 +1,12 @@
 const express = require("express");
 const router = express.Router();
+<<<<<<< HEAD
 const UsersController = require("../controllers/users");
 const { requireAuth, checkUser } = require("../middleware/auth");
+=======
+const UserController = require("../controllers/users");
+var User = require("../models/users");
+>>>>>>> e0a6ad32d7d073a4ac9ee294d1f51950b94819ad
 
 router.route("/login").post(UsersController.login_a_user);
 router.route("/signup").post(UsersController.create_a_user);
@@ -10,6 +15,7 @@ router.route("/f").post(UsersController.forgot);
 router.route("/forgot/update").post(UsersController.forgotUpdate);
 router.route("/phone").post(UsersController.send_a_message);
 
+<<<<<<< HEAD
 // prettier-ignore
 router.route("/")
     .get(UsersController.find_All) // for the Admin
@@ -39,5 +45,29 @@ router.route("/:userId/tools/:toolId/comments/:commentId")
 // .get(UsersController.find_One_Comment_of_Specific_Tool_of_Specific_User)
 // .put(UsersController.update_One_Comments_of_Specific_Tool_of_Specific_User)
 // .delete(UsersController.remove_One_Comments_of_Specific_Tool_of_Specific_User)
+=======
+router.route("/getone/:userId").get(async (req, res) => {
+  const id = req.params.userId;
+  const user = await User.findById({ _id: id });
+  res.send(user);
+});
+
+router.route("/update/:userId").put(async (req, res) => {
+  const id = req.params.userId;
+  const data = req.body;
+  for (var k in data) {
+    if (!data[k]) {
+      delete data[k];
+    }
+  }
+  const updatedUser = await User.findByIdAndUpdate({ _id: id }, data, {
+    new: true,
+  });
+  res.send(updatedUser);
+});
+router.route("/f").post(UserController.forgot);
+router.route("/forgot/update").post(UserController.forgotUpdate);
+router.route("/phone").post(UserController.send_a_message);
+>>>>>>> e0a6ad32d7d073a4ac9ee294d1f51950b94819ad
 
 module.exports = router;

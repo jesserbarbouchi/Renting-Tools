@@ -2,6 +2,7 @@
   <div class="container mt-2">
     <button @click="created">kkkkkkkkkkkkkkkkkkkkkkkkkkk</button>
 
+<<<<<<< HEAD
     <div v-for="user in users" :key="user._id">
       <div class="row">
         <div class="col-md-3 col-sm-6">
@@ -16,6 +17,19 @@
           </div>
         </div>
       </div>
+=======
+  <div class="row">
+    <div class="col-md-3 col-sm-6">
+      <div class="card card-block">
+      <h4 class="card-title text-right"><i class="material-icons">settings</i></h4>
+      
+    <!-- <img src= {{user. profile_image_uri}} alt="Photo of sunset"> -->
+
+        <h5 class="card-title mt-3 mb-3">{{user.fullname}}</h5>
+        <h5 class="card-title mt-3 mb-3">{{user.email}}</h5>
+        <h5 class="card-title mt-3 mb-3">{{user.phone_number}}</h5>
+  </div>
+>>>>>>> e0a6ad32d7d073a4ac9ee294d1f51950b94819ad
     </div>
   </div>
 </template>
@@ -26,6 +40,7 @@ export default {
   name: "Users",
   data() {
     return {
+<<<<<<< HEAD
       users: [
         {
           fullname: "",
@@ -36,6 +51,11 @@ export default {
         },
       ],
     };
+=======
+      users:[]
+
+      }
+>>>>>>> e0a6ad32d7d073a4ac9ee294d1f51950b94819ad
   },
   methods: {
     async created() {
@@ -50,10 +70,19 @@ export default {
 };
 </script>
 
+<<<<<<< HEAD
 <style scoped>
 img {
   height: 150px;
   width: 100%;
+=======
+<style>
+
+
+img{
+  height:150px;
+  width:100%;
+>>>>>>> e0a6ad32d7d073a4ac9ee294d1f51950b94819ad
 }
 
 div [class^="col-"] {
@@ -75,9 +104,17 @@ div [class^="col-"] {
   cursor: pointer;
   color: #ffa710;
 }
+<<<<<<< HEAD
 .card-title i:hover {
   transform: scale(1.25) rotate(100deg);
   color: #18d4ca;
+=======
+
+.card-title i:hover{
+  transform: scale(1.25) rotate(100deg); 
+  color:#18d4ca;
+  
+>>>>>>> e0a6ad32d7d073a4ac9ee294d1f51950b94819ad
 }
 .card:hover {
   transform: scale(1.05);

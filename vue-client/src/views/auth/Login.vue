@@ -13,7 +13,7 @@
           <router-link to="/auth/login">Log in</router-link>
         </li>
         <li>
-          <router-link to="/auth/register">Sign in</router-link>
+          <router-link to="/auth/signup">Sign in</router-link>
         </li>
       </ul>
     </nav>
@@ -29,22 +29,7 @@
                   Sign in with
                 </h6>
               </div>
-              <div class="btn-wrapper text-center">
-                <button
-                  class="bg-white active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
-                  type="button"
-                >
-                  <img alt="..." class="w-5 mr-1" :src="github" />
-                  Github
-                </button>
-                <button
-                  class="bg-white active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
-                  type="button"
-                >
-                  <img alt="..." class="w-5 mr-1" :src="google" />
-                  Google
-                </button>
-              </div>
+
               <hr class="mt-6 border-b-1 border-blueGray-300" />
             </div>
             <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
@@ -121,16 +106,12 @@
   </div>
 </template>
 <script>
-import github from "@/assets/img/github.svg";
-import google from "@/assets/img/google.svg";
 import Axios from "axios";
 
 export default {
   name: "Login",
   data() {
     return {
-      github,
-      google,
       email: "",
       password: "",
     };

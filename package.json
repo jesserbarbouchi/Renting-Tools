@@ -6,6 +6,7 @@
   "private": true,
   "keywords": [],
   "author": "",
+<<<<<<< HEAD
   "license": "ISC",
   "scripts": {
     "vue-client": "cd ./vue-client/ && npm i && npm run serve",
@@ -33,4 +34,7 @@
       "git add"
     ]
   }
+=======
+  "license": "ISC"
+>>>>>>> e0a6ad32d7d073a4ac9ee294d1f51950b94819ad
 }
