@@ -1,0 +1,1 @@
+npm i -D eslint eslint-plugin-prettier eslint-plugin-vue @babel/eslint-parser lint-staged prettier @vue/eslint-config-prettier
