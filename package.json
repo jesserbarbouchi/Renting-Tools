@@ -6,12 +6,13 @@
   "private": true,
   "scripts": {
     "vue-client": "cd ./vue-client/ && npm i && npm run serve",
-    "server-dev": "cd ./server/ && npm i && npm run server-dev"
+    "server-dev": "cd ./server/ && npm i && npm run server-dev",
+    "fix": "cd ./vue-client/ && npm i && npm run lint"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "firebase": "^9.6.1"
+ 
   }
 }
