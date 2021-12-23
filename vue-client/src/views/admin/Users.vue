@@ -1,7 +1,7 @@
 <template>
   <div class="container mt-2">
-    <button @click="fetchData">kkkkkkkkkk</button>
-      <div v-if="users.length">
+    <button @click="created">kkkkkkkkkkkkkkkkkkkkkkkkkkk</button>
+      
       <div v-for="user in users" :key="user._id">
 
   <div class="row">
@@ -17,7 +17,7 @@
     </div>
        
   </div>
-  </div>
+ 
 </div>
 
 </template>
@@ -28,40 +28,30 @@ export default {
   name: "Users",
   data() {
     return {
-    
-      fullname:"",
+      users:[
+        {
+            fullname:"",
       email:"",
       phone_number:"",
       address:"",
       profile_image_uri:"",
-      users:[]
+        }
+
+      ]
       }
   },
   methods: {
- fetchData() {
-      // var data = {
-      //   fullname: this.fullname,
-      //   email: this.email,
-      //   phone_number: this.phone_number,
-      //   address: this.address,
-      //   profile_image_uri:this.profile_image_uri
-      
-      // };
-      Axios.get("http://localhost:5000/users")
-        .then((response) => {
-          // console.log("response", response);
-          this.users=response.data
-          console.log(this.users)
-
-        })
-        .catch((error) => {
-          console.log("this error", error);
-        });
-    },
-  },
-
- 
-};
+ async created () {
+   try{
+     const res = await Axios.get("http://localhost:5000/users")
+     this.users=res.data
+     }
+     catch(error){
+       console.log(error)
+     }
+ }
+ }
+}
 </script>
 
 <style>

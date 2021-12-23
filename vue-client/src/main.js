@@ -9,11 +9,26 @@ import App from "@/App.vue";
 import Auth from "@/layouts/Auth.vue";
 
 import Login from "@/views/auth/Login.vue";
+import LoginAdmin from "@/views/admin/LoginAdmin.vue"
+import Users from "@/views/admin/Users.vue"
 import Register from "@/views/auth/Register.vue";
 
 import Landing from "@/views/Landing.vue";
 
 const routes = [
+ 
+      {
+        path: "/users",
+        component:Users
+      },
+      {
+        path: "/admin/login",
+        component: LoginAdmin
+      },
+      
+    
+  
+
   {
     path: "/auth",
     redirect: "/auth/login",
