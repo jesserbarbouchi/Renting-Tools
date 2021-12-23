@@ -23,21 +23,21 @@ router.route("/:userId")
     .delete(requireAuth, UsersController.remove_One) // user can remove his own account
 
 // prettier-ignore
-router.route("/:userId/items")
-    .get(UsersController.find_All_Items_of_Specific_User) // useful for the user & admin too
-    .post(requireAuth, UsersController.create_One_Item_of_Specific_User) // admin can add for a user an item too if the user asked for help
-    .delete(requireAuth, UsersController.remove_All_Items_of_Specific_User) // a user can delete all his items, or an admin can do it for a specific user
+router.route("/:userId/tools")
+    .get(UsersController.find_All_Tools_of_Specific_User) // useful for the user & admin too
+    .post(requireAuth, UsersController.create_One_Tool_of_Specific_User) // admin can add for a user an tool too if the user asked for help
+    .delete(requireAuth, UsersController.remove_All_Tools_of_Specific_User) // a user can delete all his tools, or an admin can do it for a specific user
 
 // prettier-ignore
-router.route("/:userId/items/:itemId")
-    .get(UsersController.find_One_Item_of_Specific_User) // any user (or admin) can have acces to a specific item of a specific user
-    .put(requireAuth, UsersController.update_One_Item_of_Specific_User) // only the owner or admin can modify (or ban) a specific item
-    .delete(requireAuth, UsersController.remove_One_Item_of_Specific_User) // only the owner (or any admin) can remove a specific item that he owns
+router.route("/:userId/tools/:toolId")
+    .get(UsersController.find_One_Tool_of_Specific_User) // any user (or admin) can have acces to a specific tool of a specific user
+    .put(requireAuth, UsersController.update_One_Tool_of_Specific_User) // only the owner or admin can modify (or ban) a specific tool
+    .delete(requireAuth, UsersController.remove_One_Tool_of_Specific_User) // only the owner (or any admin) can remove a specific tool that he owns
 
 // prettier-ignore
-router.route("/:userId/renterposts/:renterpostId/comments/:commentId")
-// .get(UsersController.find_One_Comment_of_Specific_RenterPost_of_Specific_User)
-// .put(UsersController.update_One_Comments_of_Specific_RenterPost_of_Specific_User)
-// .delete(UsersController.remove_One_Comments_of_Specific_RenterPost_of_Specific_User)
+router.route("/:userId/tools/:toolId/comments/:commentId")
+// .get(UsersController.find_One_Comment_of_Specific_Tool_of_Specific_User)
+// .put(UsersController.update_One_Comments_of_Specific_Tool_of_Specific_User)
+// .delete(UsersController.remove_One_Comments_of_Specific_Tool_of_Specific_User)
 
 module.exports = router;
