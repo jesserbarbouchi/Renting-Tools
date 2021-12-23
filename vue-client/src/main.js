@@ -14,31 +14,31 @@ import Register from "@/views/auth/Register.vue";
 import Landing from "@/views/Landing.vue";
 
 const routes = [
-    {
-        path: "/auth",
-        redirect: "/auth/login",
-        component: Auth,
-        children: [
-            {
-                path: "/auth/login",
-                component: Login,
-            },
-            {
-                path: "/auth/register",
-                component: Register,
-            },
-        ],
-    },
+  {
+    path: "/auth",
+    redirect: "/auth/login",
+    component: Auth,
+    children: [
+      {
+        path: "/auth/login",
+        component: Login,
+      },
+      {
+        path: "/auth/register",
+        component: Register,
+      },
+    ],
+  },
 
-    {
-        path: "/",
-        component: Landing,
-    },
+  {
+    path: "/",
+    component: Landing,
+  },
 ];
 
 const router = createRouter({
-    history: createWebHistory(),
-    routes,
+  history: createWebHistory(),
+  routes,
 });
 
 createApp(App).use(router).mount("#app");
