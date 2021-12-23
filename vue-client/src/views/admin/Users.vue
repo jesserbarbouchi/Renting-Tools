@@ -8,7 +8,9 @@
     <div class="col-md-3 col-sm-6">
       <div class="card card-block">
       <h4 class="card-title text-right"><i class="material-icons">settings</i></h4>
-    <img src= {{user. profile_image_uri}} alt="Photo of sunset">
+      
+    <!-- <img src= {{user. profile_image_uri}} alt="Photo of sunset"> -->
+
         <h5 class="card-title mt-3 mb-3">{{user.fullname}}</h5>
         <h5 class="card-title mt-3 mb-3">{{user.email}}</h5>
         <h5 class="card-title mt-3 mb-3">{{user.phone_number}}</h5>
@@ -28,16 +30,8 @@ export default {
   name: "Users",
   data() {
     return {
-      users:[
-        {
-            fullname:"",
-      email:"",
-      phone_number:"",
-      address:"",
-      profile_image_uri:"",
-        }
+      users:[]
 
-      ]
       }
   },
   methods: {
@@ -55,6 +49,8 @@ export default {
 </script>
 
 <style>
+
+
 img{
   height:150px;
   width:100%;
@@ -79,6 +75,7 @@ div [class^="col-"]{
   cursor:pointer;
   color:#ffa710
 }
+
 .card-title i:hover{
   transform: scale(1.25) rotate(100deg); 
   color:#18d4ca;
