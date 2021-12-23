@@ -1,14 +1,16 @@
 const express = require("express");
 const router = express.Router();
-const ToolController = require("../controllers/tools");
+const ToolsController = require("../controllers/tools");
 
 router
-	.route("/")
-	.get(ToolController.find_all_tools)
-	.post(ToolController.create_a_tool);
+  .route("/")
+  .get(ToolsController.find_All)
+  .post(ToolsController.create_A_New_One);
 
 router
-	.route("/:id")
-	.get(ToolController.find_use_tools)
-	.patch(ToolController.find_tool_and_update);
+  .route("/:itemId")
+  .get(ToolsController.find_One)
+  .put(ToolsController.update_One)
+  .patch(ToolsController.view_Plus_PLUS)
+  .delete(ToolsController.remove_One);
 module.exports = router;
