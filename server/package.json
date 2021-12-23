@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "server-dev": "nodemon index.js",
-    "back": "nodemon index.js"
+    "server-dev": "cross-env NODE_ENV=development nodemon index.js",
+    "seed-worker": "node worker.js"
   },
   "keywords": [],
   "author": "",

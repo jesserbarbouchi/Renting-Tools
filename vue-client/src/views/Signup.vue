@@ -3,9 +3,9 @@
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-4 well well-sm">
         <legend>
-          <a href="http://www.jquery2dotnet.com"
-            ><i class="glyphicon glyphicon-globe"></i
-          ></a>
+          <a href="http://www.jquery2dotnet.com">
+            <i class="glyphicon glyphicon-globe"></i>
+          </a>
           Sign up!
         </legend>
         <form
@@ -20,7 +20,7 @@
               <input
                 class="form-control"
                 name="fullname"
-                v-model="this.data.fullname"
+                v-model="fullname"
                 placeholder="fullname"
                 type="text"
                 required
@@ -31,7 +31,7 @@
               <input
                 class="form-control"
                 name="username"
-                v-model="this.data.username"
+                v-model="username"
                 placeholder="username"
                 type="text"
                 required
@@ -41,14 +41,14 @@
           <input
             class="form-control"
             name="youremail"
-            v-model="this.data.email"
+            v-model="email"
             placeholder="Your Email"
             type="email"
           />
           <input
             class="form-control"
             name="phone_number"
-            v-model="this.data.phone_number"
+            v-model="phone_number"
             placeholder="phone_number"
             type="text"
             required
@@ -56,7 +56,7 @@
           <input
             class="form-control"
             name="address"
-            v-model="this.data.address"
+            v-model="address"
             placeholder="address"
             type="text"
             required
@@ -64,13 +64,13 @@
           <input
             class="form-control"
             name="password"
-            v-model="this.data.password"
+            v-model="password"
             placeholder="password"
             type="password"
           />
           <button
             class="btn btn-lg btn-primary btn-block"
-            v-on:click="handleSubmit"
+            v-on:click="fetchData"
             type="submit"
           >
             Sign up
@@ -78,11 +78,10 @@
         </form>
       </div>
     </div>
-    <Checkout/>
   </div>
 </template>
 
-<style>
+<style scoped>
 .form-control {
   display: flex;
   justify-content: space-between;
@@ -91,59 +90,54 @@
 </style>
 
 <script>
-import Checkout from "./Checkout.vue";
 import Axios from "axios";
 export default {
-  components: { Checkout  },
   name: "Signup",
   data() {
     return {
-      data: {
-        username: "",
-        fullname: "",
-        email: "",
-        phone_number: "",
-        password: "",
-        address: "",
-      },
+      username: "",
+      fullname: "",
+      email: "",
+      phone_number: "",
+      password: "",
+      address: "",
     };
   },
   methods: {
-    sendMail() {
-      Axios.post("http://localhost:5000/users/f", {
-        email: this.data.email,
-      }).then(() => {
-        console.log("email", this.data.email);
-      });
-    },
     handleSubmit() {
-      var data = this.data;
-      console.log("data", data);
-      Axios.post("http://localhost:5000/users/signup", data)
+      var data = {
+        fullname: this.fullname,
+        username: this.username,
+        email: this.email,
+        phone_number: this.phone_number,
+        address: this.address,
+        password: this.password,
+      };
+      Axios.post("http://localhost:5000/signup", { data })
         .then((response) => {
-          console.log("response", response.config.data);
-        })
-        .then(() => {
-          this.sendMail();
+          console.log("response", response);
         })
         .catch((error) => {
-          console.log("this is an error", error);
+          console.log(error);
         });
-      this.$router.push("/login");
     },
-    //     fetchData(){
-    //              var data ={
-    // fullname   : this.fullname,
-    //         username   : this.username,
-    //         email      : this.email,
-    //         phone_number: this.phone_number,
-    //         address    : this.address,
-    //         password   :this.password
-    //         }
-    //         Axios.get("http://localhost:5000/signup",{data})
-    //         .then(response=>{console.log("response",response);})
-    //         .catch(error=>{console.log("this error",error);})
-    //     }
+    fetchData() {
+      var data = {
+        fullname: this.fullname,
+        username: this.username,
+        email: this.email,
+        phone_number: this.phone_number,
+        address: this.address,
+        password: this.password,
+      };
+      Axios.get("http://localhost:5000/signup", { data })
+        .then((response) => {
+          console.log("response", response);
+        })
+        .catch((error) => {
+          console.log("this error", error);
+        });
+    },
   },
 };
 </script>

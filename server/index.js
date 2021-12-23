@@ -1,79 +1,93 @@
+/********************* Requires *********************/
 var express = require("express");
-var mongoose = require("mongoose");
+var app = express();
+var cors = require("cors");
+const passport = require("passport");
+
+const cookieSession = require("cookie-session");
+const mongoose = require("mongoose");
+
+/****************** Helper Functions *****************/
+const { whisp, gossip, yell, ignore } = require("./helpers/whisper");
+ignore(gossip);
+
+/****************** Server Settings ******************/
+const { port, database, keys } = require("./config/settings");
+const passportSetup = require("./config/passport-setup");
+ignore(passportSetup, passport);
+
+/***************** Including Routes *****************/
+const auth = require("./routers/auth-routes");
 var users = require("./routers/users");
 var admin = require("./routers/admin");
 var tools = require("./routers/tools");
-var app = express();
-// var GoogleStrategy = require('passport-google-oauth20').Strategy;
-// var createError = require('http-errors');
-// const session = require('express-session');
 
-var cors = require("cors");
-const port = 5000;
+/***** Database connection & Listening Requests *****/
+mongoose.Promise = global.Promise;
 
-app.use(cors());
+// prettier-ignore
+mongoose
+  .connect(database.mongodb.url)
+  .then((result) => {
+    ignore(result)
+    whisp(`Mongoose is now connected to the remote MongoDB cluster: \n${database.mongodb.url} \n`);
+    app.listen(port, () => whisp(`The server is now listening on http://localhost:${port}/`));
+  })
+  .catch((error) => yell("Error have been encountered while connecting to database", error));
+
+/******************** Middleware ********************/
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors({ credentials: true, sameSite: true }));
 
-// app.use(session({
-//   resave: false,
-//   saveUninitialized: true,
-//   secret: 'SECRET'
-// }));
+app.use((req, res, next) => {
+  ignore(req);
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET , PUT , POST , DELETE");
+  res.header("Access-Control-Allow-Headers", "Content-Type, x-requested-with");
+  next(); // Important
+});
 
-// app.get('/', function(req, res) {
-//   res.render('pages/auth');
-// });
-// const passport = require('passport');
-// var userProfile;
+// setting up the age of the cookie & the key to encrypt the cookie before sending it to the browser
+app.use(
+  cookieSession({
+    // maxAge: 24 * 60 * 60 * 1000, // day in milliseconds
+    maxAge: 10 * 1000, // 10 seconds in milliseconds
+    keys: [keys.session.cookieKey],
+  })
+);
 
-// app.use(passport.initialize());
+/********************** Routes **********************/
 
-// app.use((req, res, next) => {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Methods", "GET , PUT , POST , DELETE");
-//   res.header("Access-Control-Allow-Headers", "Content-Type, x-requested-with");
-//   next(); // Important
-// })
-// app.get('/google',passport.authenticate('google', { scope : ['profile', 'email'] }))
-
-// app.get('/sucess', passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
-
-// console.log('hhhhhhhh');
-//   res.redirect('http://localhost:4200');
-// })
-
-// catch 404 and forward to error handler
-// app.use(function(req, res, next) {
-//   next(createError(404));
-// });
-// passport.serializeUser((user, done) => {
-//     done(null, user.id);
-// })
-
-// passport.deserializeUser((user, done) => {
-//     done(null, user);
-// })
-
-// passport.use(new GoogleStrategy({
-//     clientID: '1032421990118-qmdf404tpdr25pc22kooarn5aqpfuldd.apps.googleusercontent.com',
-//     clientSecret: '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',
-//     callbackURL: "http://localhost:4200/sucess"},
-//   function(accessToken, refreshToken, profile, cb) {
-//     // Register user here.
-
-//     console.log(profile);
-// 	cb(null, profile);
-
-// }
-// ));
-// app.get('http:localhost:5000/google/callback',(req,res)=>{res.end("hi")})
-app.use("/users", users);
-app.use("/admin", admin);
+app.use("/auth", auth);
 app.use("/tools", tools);
+app.use("/users", users);
 
-mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://localhost:27017/rentingTools").then(res => console.log("mongoose connected !"));
-app.listen(port, function () {
-	console.log(`listening on port http://localhost:${port} !`);
+/**** Middleware that Catch the "Wrong Endpoint" ****/
+// Catch 404 errors and forward them to error handler
+app.use((req, res, next) => {
+  ignore(req, res);
+
+  const wrongEndpoint = new Error("Not found");
+  wrongEndpoint.status = 404;
+  next(wrongEndpoint);
+});
+
+/************** Error handler function **************/
+// Error handler function
+app.use((wrongEndpoint, req, res, next) => {
+  ignore(req, next);
+
+  const error = app.get("env") === "development" ? wrongEndpoint : {};
+  const status = wrongEndpoint.status || 500;
+
+  // respond to client
+  res.status(status).json({
+    error: {
+      message: error.message,
+    },
+  });
+  // Respond to ourselves
+  yell(err);
 });

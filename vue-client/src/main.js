@@ -1,19 +1,61 @@
 import { createApp } from "vue";
-import App from "./App.vue";
-import router from "./router";
-import { initializeApp } from "firebase/app";
+import { createWebHistory, createRouter } from "vue-router";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyABfmOmyyY4k_OAWQ8fbx3MfpQXSEikty8",
-  authDomain: "greenfield-9ed83.firebaseapp.com",
-  projectId: "greenfield-9ed83",
-  storageBucket: "greenfield-9ed83.appspot.com",
-  messagingSenderId: "1071633017522",
-  appId: "1:1071633017522:web:4ef218a397dbd491b3f7ab",
-  measurementId: "G-DVTVFLPR04",
-};
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import "@/assets/styles/tailwind.css";
 
-initializeApp(firebaseConfig);
+import App from "@/App.vue";
+
+import Auth from "@/layouts/Auth.vue";
+
+import Login from "@/views/auth/Login.vue";
+import Signup from "@/views/auth/Signup.vue";
+import profile from "@/views/Profile.vue";
+
+import Landing from "@/views/Landing.vue";
+import LoginAdmin from "@/views/admin/LoginAdmin.vue";
+import Users from "@/views/admin/Users.vue";
+
+const routes = [
+  {
+    path: "/users",
+    component: Users,
+  },
+  {
+    path: "/admin/login",
+    component: LoginAdmin,
+  },
+
+  {
+    path: "/auth",
+    redirect: "/auth/login",
+    component: Auth,
+    children: [
+      {
+        path: "/auth/login",
+        component: Login,
+      },
+      {
+        path: "/auth/signup",
+        component: Signup,
+      },
+    ],
+  },
+
+  {
+    path: "/",
+    component: Landing,
+  },
+  {
+    path: "/profile",
+    component: profile,
+  },
+];
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes,
+});
 
 createApp(App).use(router).mount("#app");
 
