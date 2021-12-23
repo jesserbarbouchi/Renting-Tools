@@ -27,23 +27,24 @@ module.exports = {
 				email,
 				phone_number,
 				password,
-				adrress,
+				address,
 			} = req.body;
 			const user = new User({
 				username,
 				fullname,
 				email,
 				phone_number,
-				adrress,
+				address,
 				password,
 			});
+			
 			if (
 				!username ||
 				!fullname ||
 				!email ||
 				!phone_number ||
 				!password ||
-				!adrress
+				!address
 			)
 				return res
 					.status(400)
@@ -57,7 +58,9 @@ module.exports = {
 
 			res.status(200).send(useer);
 		} catch (error) {
-			res.status(404).json({ message: "error", error: "error" });
+			console.log(error);
+			// res.status(404).json({ message: "error", error: "error" });
+			res.status(404).json(error);
 		}
 	},
 	login_a_user: async (req, res) => {
