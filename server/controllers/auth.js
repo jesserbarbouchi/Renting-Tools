@@ -91,6 +91,7 @@ module.exports = {
           const createdResetPassword = await ResetPassword.create(resetPassword);
 
           // const { websiteName, websiteURL, subject, mailerParams, htmlFormat } = mailerParams
+          if(!mailerParams) mailerParams = {}
           mailerParams.fullName = foundUser.fullName
           mailerParams.email = email
           mailerParams.hash_link = hash_link
