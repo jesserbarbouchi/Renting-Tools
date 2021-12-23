@@ -45,22 +45,22 @@
             placeholder="Your Email"
             type="email"
           />
-            <input
-                class="form-control"
-                name="phone_number"
-                v-model="phone_number"
-                placeholder="phone_number"
-                type="text"
-                required
-              />
-                    <input
-                class="form-control"
-                name="address"
-                v-model="address"
-                placeholder="address"
-                type="text"
-                required
-              />
+          <input
+            class="form-control"
+            name="phone_number"
+            v-model="phone_number"
+            placeholder="phone_number"
+            type="text"
+            required
+          />
+          <input
+            class="form-control"
+            name="address"
+            v-model="address"
+            placeholder="address"
+            type="text"
+            required
+          />
           <input
             class="form-control"
             name="password"
@@ -68,7 +68,11 @@
             placeholder="password"
             type="password"
           />
-          <button class="btn btn-lg btn-primary btn-block" v-on:click="fetchData" type="submit">
+          <button
+            class="btn btn-lg btn-primary btn-block"
+            v-on:click="fetchData"
+            type="submit"
+          >
             Sign up
           </button>
         </form>
@@ -91,43 +95,49 @@ export default {
   name: "Signup",
   data() {
     return {
-     username    :"",
-	 fullname    :"",
-	 email       :"",
-	 phone_number:"",
-	 password    :"",
-	 address     :"",
-    }
+      username: "",
+      fullname: "",
+      email: "",
+      phone_number: "",
+      password: "",
+      address: "",
+    };
   },
   methods: {
     handleSubmit() {
-        var data ={
-fullname   : this.fullname,
-        username   : this.username,
-        email      : this.email,
+      var data = {
+        fullname: this.fullname,
+        username: this.username,
+        email: this.email,
         phone_number: this.phone_number,
-        address    : this.address,
-        password   :this.password
-        }
-      Axios.post("http://localhost:5000/signup", {data
-        
-      })
-      .then(response=>{console.log("response",response);})
-      .catch(error=>{console.log(error);})
+        address: this.address,
+        password: this.password,
+      };
+      Axios.post("http://localhost:5000/signup", { data })
+        .then((response) => {
+          console.log("response", response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
-    fetchData(){
-             var data ={
-fullname   : this.fullname,
-        username   : this.username,
-        email      : this.email,
+    fetchData() {
+      var data = {
+        fullname: this.fullname,
+        username: this.username,
+        email: this.email,
         phone_number: this.phone_number,
-        address    : this.address,
-        password   :this.password
-        }
-        Axios.get("http://localhost:5000/signup",{data})
-        .then(response=>{console.log("response",response);})
-        .catch(error=>{console.log("this error",error);})
-    }
+        address: this.address,
+        password: this.password,
+      };
+      Axios.get("http://localhost:5000/signup", { data })
+        .then((response) => {
+          console.log("response", response);
+        })
+        .catch((error) => {
+          console.log("this error", error);
+        });
+    },
   },
 };
 </script>

@@ -5,12 +5,12 @@
 </template>
 
 <script>
-import Axios from 'axios'
+import Axios from "axios";
 export default {
   name: "Home",
-  async created(){
-    var response = await Axios.get('http://localhost:5000/user');
-    console.log("response",response);
-  }
+  async created() {
+    var response = await Axios.get("http://localhost:5000/user");
+    console.log("response", response);
+  },
 };
 </script>
