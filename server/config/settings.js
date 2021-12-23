@@ -9,6 +9,7 @@ if (process.env.NODE_ENV) {
 } else {
   dotenv.config(); // will load all environment variable from the .env file, and put it inside the process.env variable
 }
+console.log("AAAAAAAAa", process.env.NODE_ENV);
 
 mongo_url =
   (process.env.MONGO_PROTOCOL ? process.env.MONGO_PROTOCOL : "mongodb://") +

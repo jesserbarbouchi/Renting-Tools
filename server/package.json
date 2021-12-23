@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server-dev": "cross-env NODE_ENV=HELLO nodemon index.js",
-    "seed-worker":"node worker.js"
+    "server-dev": "cross-env NODE_ENV=development nodemon index.js",
+    "seed-worker": "node worker.js"
   },
   "keywords": [],
   "author": "",

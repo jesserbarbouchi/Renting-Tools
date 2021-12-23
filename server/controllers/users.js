@@ -14,7 +14,7 @@ module.exports = {
       // the server will try the following
       const foundUsers = await User
                             .find()
-                            .populate(["ownedItems","rentedItems"])
+                            .populate(["ownedTools","rentedTools"])
                             .select("-password");
 
       res.status(200).send(foundUsers);
@@ -50,7 +50,7 @@ module.exports = {
       // the server will try the following
       const foundUser = await User
                               .findById({ _id: userId })
-                              .populate(["ownedItems","rentedItems"])
+                              .populate(["ownedTools","rentedTools"])
                               .select('-password')
 
       res.status(200).json(foundUser);
@@ -73,7 +73,7 @@ module.exports = {
       // the server will try the following
       const updatedUser = await User
                           .findByIdAndUpdate({_id: userId}, user, { new: true })
-                          .populate(["ownedItems","rentedItems"])
+                          .populate(["ownedTools","rentedTools"])
                           .select('-password')
 
       res.status(200).json(updatedUser)
@@ -96,7 +96,7 @@ module.exports = {
       // the server will try the following
       const updatedUser = await User
                           .findByIdAndRemove({_id: userId}, user, { new: true })
-                          .populate(["ownedItems","rentedItems"])
+                          .populate(["ownedTools","rentedTools"])
                           .select('-password')
 
       res.status(200).json(updatedUser)
@@ -106,12 +106,29 @@ module.exports = {
       // next(error);
     }
   },
-  find_All_Items_of_Specific_User: async (req, res) => {},
-  create_One_Item_of_Specific_User: async (req, res) => {},
-  remove_All_Items_of_Specific_User: async (req, res) => {},
-  find_One_Item_of_Specific_User: async (req, res) => {},
-  update_One_Item_of_Specific_User: async (req, res) => {},
-  remove_One_Item_of_Specific_User: async (req, res) => {},
+  find_All_Tools_of_Specific_User: async (req, res) => {
+    console.log("A")
+  },
+  create_One_Tool_of_Specific_User: async (req, res) => {
+    console.log("A")
+
+  },
+  remove_All_Tools_of_Specific_User: async (req, res) => {
+    console.log("A")
+
+  },
+  find_One_Tool_of_Specific_User: async (req, res) => {
+    console.log("A")
+
+  },
+  update_One_Tool_of_Specific_User: async (req, res) => {
+    console.log("A")
+
+  },
+  remove_One_Tool_of_Specific_User: async (req, res) => {
+    console.log("A")
+
+  },
   create_a_user: async (req, res) => {
     try {
       const { username, fullname, email, phone_number, password, adrress } =
