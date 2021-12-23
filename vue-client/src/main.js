@@ -9,9 +9,8 @@ import App from "@/App.vue";
 import Auth from "@/layouts/Auth.vue";
 
 import Login from "@/views/auth/Login.vue";
-import LoginAdmin from "@/views/admin/LoginAdmin.vue"
-import Users from "@/views/admin/Users.vue"
-import Register from "@/views/auth/Register.vue";
+import Signup from "@/views/auth/Signup.vue";
+import profile from "@/views/Profile.vue"
 
 import Landing from "@/views/Landing.vue";
 
@@ -39,8 +38,8 @@ const routes = [
         component: Login,
       },
       {
-        path: "/auth/register",
-        component: Register,
+        path: "/auth/signup",
+        component: Signup,
       },
     ],
   },
@@ -49,6 +48,10 @@ const routes = [
     path: "/",
     component: Landing,
   },
+  {
+    path : "/profile",
+    component : profile
+  }
 ];
 
 const router = createRouter({

@@ -13,7 +13,7 @@
           <router-link to="/auth/login">Log in</router-link>
         </li>
         <li>
-          <router-link to="/auth/register">Sign in</router-link>
+          <router-link to="/auth/signup">Sign in</router-link>
         </li>
       </ul>
     </nav>
@@ -51,18 +51,34 @@
               <div class="text-blueGray-400 text-center mb-3 font-bold">
                 <small>Or sign up with credentials</small>
               </div>
-              <form>
+              <form @submit.prevent="handleSubmit">
                 <div class="relative w-full mb-3">
                   <label
                     class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                     htmlFor="grid-password"
                   >
-                    Name
+                    full name
                   </label>
                   <input
-                    type="email"
+                    v-model="this.data.fullname"
+                    type="text"
                     class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     placeholder="Name"
+                  />
+                </div>
+
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlFor="grid-password"
+                  >
+                    username
+                  </label>
+                  <input
+                    v-model="this.data.username"
+                    type="text"
+                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    placeholder="Email"
                   />
                 </div>
 
@@ -74,7 +90,8 @@
                     Email
                   </label>
                   <input
-                    type="email"
+                    v-model="this.data.username"
+                    type="text"
                     class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     placeholder="Email"
                   />
@@ -124,18 +141,65 @@
         </div>
       </div>
     </div>
+    <Checkout />
   </div>
 </template>
-<script>
-import github from "@/assets/img/github.svg";
-import google from "@/assets/img/google.svg";
 
+<script>
+import Checkout from "../Checkout.vue";
+import Axios from "axios";
 export default {
+  components: { Checkout },
+  name: "Signup",
   data() {
     return {
-      github,
-      google,
+      data: {
+        username: "",
+        fullname: "",
+        email: "",
+        phone_number: "",
+        password: "",
+        address: "",
+      },
     };
+  },
+  methods: {
+    sendMail() {
+      Axios.post("http://localhost:5000/users/f", {
+        email: this.data.email,
+        username: this.data.username,
+      }).then(() => {
+        console.log("email", this.data.email, this.data.username);
+      });
+    },
+    handleSubmit() {
+      var data = this.data;
+      console.log("data", data);
+      Axios.post("http://localhost:5000/users/signup", data)
+        .then((response) => {
+          console.log("response", response.config.data);
+        })
+        .then(() => {
+          this.sendMail();
+        })
+        .catch((error) => {
+          console.log("this is an error", error);
+        });
+      this.$router.push("/login");
+    },
+    //     fetchData(){
+    //              var data ={
+    // fullname   : this.fullname,
+    //         username   : this.username,
+    //         email      : this.email,
+    //         phone_number: this.phone_number,
+    //         address    : this.address,
+    //         password   :this.password
+    //         }
+    //         Axios.get("http://localhost:5000/signup",{data})
+    //         .then(response=>{console.log("response",response);})
+    //         .catch(error=>{console.log("this error",error);})
+    //     }
   },
 };
 </script>
