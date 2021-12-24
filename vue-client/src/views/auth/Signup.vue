@@ -37,10 +37,10 @@
                     full name
                   </label>
                   <input
-                    v-model="this.data.fullname"
+                    v-model="this.data.fullName"
                     type="text"
                     class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    placeholder="Name"
+                    placeholder="Enter your full name"
                   />
                 </div>
 
@@ -67,13 +67,13 @@
                     Email
                   </label>
                   <input
-                    v-model="this.data.Email"
+                    v-model="this.data.email"
                     type="text"
                     class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     placeholder="Email"
                   />
                 </div>
-                             <div class="relative w-full mb-3">
+               <div class="relative w-full mb-3">
                   <label
                     class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                     htmlFor="grid-password"
@@ -81,10 +81,10 @@
                     Phone Number
                   </label>
                   <input
-                    v-model="this.data.phone_number"
+                    v-model="this.data.phoneNumber"
                     type="text"
                     class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    placeholder="Email"
+                    placeholder="Enter the phone number"
                   />
                 </div>
    <div class="relative w-full mb-3">
@@ -92,13 +92,13 @@
                     class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                     htmlFor="grid-password"
                   >
-                    Phone Number
+                    City
                   </label>
                   <input
-                    v-model="this.data.address"
+                    v-model="this.data.city"
                     type="text"
                     class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    placeholder="Email"
+                    placeholder="Enter the city"
                   />
                 </div>
                 <div class="relative w-full mb-3">
@@ -144,30 +144,32 @@ export default {
     return {
       data: {
         username: "",
-        fullname: "",
+        fullName: "",
         email: "",
-        phone_number: "",
-        password: "",
-        address: "",
+        phoneNumber: "",
+        city: "",
+        password: ""
+    
       },
     };
   },
   methods: {
-    sendMail() {
-      Axios.post("http://localhost:5000/users/f", {
-        email: this.data.email,
-        username: this.data.username,
-      }).then(() => {
-        console.log("email", this.data.email, this.data.username);
-      });
-    },
+    // sendMail() {
+    //   Axios.post("http://localhost:5000/", {
+    //     email: this.data.email,
+    //     username: this.data.username,
+    //   }).then(() => {
+    //     console.log("email", this.data.email, this.data.username);
+    //   });
+    // },
     handleSubmit() {
       console.log("hello")
       var data = this.data;
       console.log("data", this.data);
       Axios.post("http://localhost:5000/auth/signup", data)
         .then((response) => {
-          console.log("response", response.config.data);
+          console.log("response", response.data);
+   
         })
         .then(() => {
              this.sendMail()
@@ -176,7 +178,7 @@ export default {
           console.log("this is an error", error);
         });
       // this.$router.push("/login");
-    },
+    }
     //     fetchData(){
     //              var data ={
     // fullname   : this.fullname,

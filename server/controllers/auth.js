@@ -11,7 +11,8 @@ const ResetPassword = require("../models/resetPassword");
 const { simplifyError } = require("../helpers/errorParser");
 const { loginParser } = require("../helpers/loginParser");
 const { gMailer } = require("../helpers/nodeMailer");
-const { yell } = require("../helpers/whisper");
+const { whisp, yell } = require("../helpers/whisper");
+const { ping } = require("../helpers/authorizer")
 
 const createToken = (id) => {
   return jwt.sign({ id }, secret, {
@@ -23,13 +24,15 @@ const createToken = (id) => {
 module.exports = {
     signin: async (req, res, next) => {
       const { username_or_email , password } = req.body
+      
       let filter = loginParser(username_or_email.toLowerCase()) // login should always be lowercase
-
+      
       try {
         const loggedInUser = await User.login(filter, password)
 
-        const token = createToken(loggedInUser._id)
-        res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 , sameSite: true })
+        const token = ping(loggedInUser._id)
+         
+        // res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 , sameSite: true })
 
         const response = { user: loggedInUser , jwt: token }
         res.status(201).json(response)
@@ -40,23 +43,24 @@ module.exports = {
     },
 
     signup: async (req, res, next) => {
-        const newUser = { username, fullName, email, phoneNumber, password, city} = req.body;
+        const newUser = { username,fullName, email, phoneNumber, password, city } = req.body;
+
         try {
           const savedUser = await User.create(newUser);
           const foundUser = await User
                               .findById(savedUser._id)
                               .select("-password");
 
+          whisp(foundUser)
+
           // const { websiteName, websiteURL, subject, mailerParams, htmlFormat } = mailerParams
           // let mailerParams = { websiteName, websiteURL, subject, textFormat, htmlFormat, fullName, email };
-          mailerParams={}
-          mailerParams.fullName = fullName
-          mailerParams.email = email
-          // mailerParams.username = username
-          gMailer(req.body.mailerParams, "signup")
+          mailerParams = { fullName, email }
+          gMailer(mailerParams, "signup")
 
           res.status(201).json(foundUser);
         } catch (error) {
+           yell(error)
             res.status(400).json(simplifyError(error));
         }
     },
@@ -95,6 +99,7 @@ module.exports = {
           mailerParams.fullName = foundUser.fullName
           mailerParams.email = email
           mailerParams.hash_link = hash_link
+          console.log(`qqqqqqqqqqqqqqqqq`,mailerParams)
           gMailer(mailerParams, "signup")
 
           res.status(201).json("We've sent to you an email containing new link for reseting password for your teacher account")
