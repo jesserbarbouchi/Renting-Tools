@@ -114,7 +114,7 @@ export default {
         address: this.address,
         password: this.password,
       };
-      Axios.post("http://localhost:5000/signup", { data })
+      Axios.post("http://localhost:5000/auth/signup", { data })
         .then((response) => {
           console.log("response", response);
         })

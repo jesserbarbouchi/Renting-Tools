@@ -40,8 +40,7 @@ module.exports = {
     },
 
     signup: async (req, res, next) => {
-        const newUser = { username, fullname, email, phoneNumber, password, city, mailerParams } = req.body;
-
+        const newUser = { username, fullName, email, phoneNumber, password, city} = req.body;
         try {
           const savedUser = await User.create(newUser);
           const foundUser = await User
@@ -50,10 +49,11 @@ module.exports = {
 
           // const { websiteName, websiteURL, subject, mailerParams, htmlFormat } = mailerParams
           // let mailerParams = { websiteName, websiteURL, subject, textFormat, htmlFormat, fullName, email };
+          mailerParams={}
           mailerParams.fullName = fullName
           mailerParams.email = email
           // mailerParams.username = username
-          gMailer(mailerParams, "signup")
+          gMailer(req.body.mailerParams, "signup")
 
           res.status(201).json(foundUser);
         } catch (error) {

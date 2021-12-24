@@ -87,7 +87,20 @@
                     placeholder="Email"
                   />
                 </div>
-
+   <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlFor="grid-password"
+                  >
+                    Phone Number
+                  </label>
+                  <input
+                    v-model="this.data.address"
+                    type="text"
+                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    placeholder="Email"
+                  />
+                </div>
                 <div class="relative w-full mb-3">
                   <label
                     class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
@@ -102,23 +115,6 @@
                     placeholder="Password"
                   />
                 </div>
-
-                <div>
-                  <label class="inline-flex items-center cursor-pointer">
-                    <input
-                      id="customCheckLogin"
-                      type="checkbox"
-                      class="form-checkbox border-0 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150"
-                    />
-                    <span class="ml-2 text-sm font-semibold text-blueGray-600">
-                      I agree with the
-                      <a href="javascript:void(0)" class="text-emerald-500">
-                        Privacy Policy
-                      </a>
-                    </span>
-                  </label>
-                </div>
-
                 <div class="text-center mt-6">
                   <button
                     class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
@@ -169,12 +165,12 @@ export default {
       console.log("hello")
       var data = this.data;
       console.log("data", this.data);
-      Axios.post("http://localhost:5000/users/signup", data)
+      Axios.post("http://localhost:5000/auth/signup", data)
         .then((response) => {
           console.log("response", response.config.data);
         })
         .then(() => {
-             
+             this.sendMail()
         })
         .catch((error) => {
           console.log("this is an error", error);
