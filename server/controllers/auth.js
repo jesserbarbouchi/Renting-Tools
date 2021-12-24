@@ -11,7 +11,7 @@ const ResetPassword = require("../models/resetPassword");
 const { simplifyError } = require("../helpers/errorParser");
 const { loginParser } = require("../helpers/loginParser");
 const { gMailer } = require("../helpers/nodeMailer");
-const { yell } = require("../helpers/whisper");
+const { whisp, yell } = require("../helpers/whisper");
 
 const createToken = (id) => {
   return jwt.sign({ id }, secret, {
@@ -40,7 +40,7 @@ module.exports = {
     },
 
     signup: async (req, res, next) => {
-        const newUser = { username, fullname, email, phoneNumber, password, city, mailerParams } = req.body;
+        const newUser = { username,fullName, email, phoneNumber, password, city } = req.body;
 
         try {
           const savedUser = await User.create(newUser);
@@ -48,15 +48,16 @@ module.exports = {
                               .findById(savedUser._id)
                               .select("-password");
 
+          whisp(foundUser)
+
           // const { websiteName, websiteURL, subject, mailerParams, htmlFormat } = mailerParams
           // let mailerParams = { websiteName, websiteURL, subject, textFormat, htmlFormat, fullName, email };
-          mailerParams.fullName = fullName
-          mailerParams.email = email
-          // mailerParams.username = username
+          mailerParams = { fullName, email }
           gMailer(mailerParams, "signup")
 
           res.status(201).json(foundUser);
         } catch (error) {
+           yell(error)
             res.status(400).json(simplifyError(error));
         }
     },
@@ -95,6 +96,7 @@ module.exports = {
           mailerParams.fullName = foundUser.fullName
           mailerParams.email = email
           mailerParams.hash_link = hash_link
+          console.log(`qqqqqqqqqqqqqqqqq`,mailerParams)
           gMailer(mailerParams, "signup")
 
           res.status(201).json("We've sent to you an email containing new link for reseting password for your teacher account")

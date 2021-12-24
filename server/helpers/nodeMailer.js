@@ -5,8 +5,8 @@ const { whisp, yell, ignore } = require("./whisper");
 const { serverEmail, serverPassword, testerEmail, domainName, hostName, realURL } = require("../config/settings").email;
 
 // prettier-ignore
-const initHostName = ({ websiteName }) => websiteName ? websiteName : `"${hostName} 👻" <${serverEmail}>`
-const initDomainName = ({ websiteURL }) =>
+const initHostName = ( websiteName ) => websiteName ? websiteName : `"${hostName} 👻" <${serverEmail}>`
+const initDomainName = ( websiteURL ) =>
   websiteURL ? websiteURL : domainName;
 
 const initUserEmail = (userEmail) => (userEmail ? userEmail : testerEmail);
