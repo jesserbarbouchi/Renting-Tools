@@ -12,10 +12,12 @@
         <!-- Image for mobile view-->
         <div
           class="block lg:hidden rounded-full shadow-xl mx-auto -mt-16 h-48 w-48 bg-cover bg-center"
-          style="background-image: url({user.profile_image_uri})"
+          style="
+            background-image: url({user.profile_image_uri});
+          "
         ></div>
 
-        <h1 class="text-3xl font-bold pt-8 lg:pt-0">{{ user.fullname }}</h1>
+        <h1 class="text-3xl font-bold pt-8 lg:pt-0"> {{user.fullname}}</h1>
         <div
           class="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2 border-green-500 opacity-25"
         ></div>
@@ -31,9 +33,9 @@
               d="M9 12H1v6a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6h-8v2H9v-2zm0-1H0V5c0-1.1.9-2 2-2h4V2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1h4a2 2 0 0 1 2 2v6h-9V9H9v2zm3-8V2H8v1h4z"
             />
           </svg>
-          phone N° : {{ user.phone_number }}
+         phone N° : {{user.phone_number}}
         </p>
-        <p
+          <p
           class="pt-4 text-base font-bold flex items-center justify-center lg:justify-start"
         >
           <svg
@@ -45,9 +47,9 @@
               d="M9 12H1v6a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6h-8v2H9v-2zm0-1H0V5c0-1.1.9-2 2-2h4V2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1h4a2 2 0 0 1 2 2v6h-9V9H9v2zm3-8V2H8v1h4z"
             />
           </svg>
-          Address : {{ user.address }}
+         Address : {{user.address}}
         </p>
-        <p
+          <p
           class="pt-4 text-base font-bold flex items-center justify-center lg:justify-start"
         >
           <svg
@@ -59,8 +61,9 @@
               d="M9 12H1v6a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6h-8v2H9v-2zm0-1H0V5c0-1.1.9-2 2-2h4V2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1h4a2 2 0 0 1 2 2v6h-9V9H9v2zm3-8V2H8v1h4z"
             />
           </svg>
-          joined from : {{ joined }}
+         joined from : {{joined}}
         </p>
+     
 
         <p class="pt-8 text-sm">
           Totally optional short description about yourself, what you do and so
@@ -108,31 +111,17 @@
             class="block text-gray-700 text-sm font-bold mb-2"
             for="First Name"
           >
-            First Name
+            full name
           </label>
           <input
-            v-model="this.data.username"
+            v-model="this.data.fullname"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="username"
             type="text"
             placeholder="Last Name"
           />
         </div>
-        <div class="mb-6">
-          <label
-            class="block text-gray-700 text-sm font-bold mb-2"
-            for="password"
-          >
-            Last Name
-          </label>
-          <input
-            v-model="this.data.lastname"
-            class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-            id="password"
-            type="Email"
-            placeholder="Email"
-          />
-        </div>
+
         <div class="mb-6">
           <label
             class="block text-gray-700 text-sm font-bold mb-2"
@@ -211,22 +200,15 @@
 <script>
 // ///////////////////////JAVA SCRIPT//////////////////////
 import Axios from "axios";
-import moment from "moment";
+import moment from "moment"
 
 export default {
   name: "profile",
   data() {
     return {
-      user: {
-        fullname: "",
-        email: "",
-        phone_number: "",
-        profile_image_uri: "",
-        address: "",
-      },
+      user:{},
       data: {
-        username: "",
-        lastname: "",
+        fullname: "",
         Email: "",
         phone_number: "",
         address: "",
@@ -237,20 +219,22 @@ export default {
       upluadValue: 0,
       edite: false,
       userId: "61c455152e6c9376129025fb",
-      date: "",
+      date :""
     };
   },
-  mounted: async function () {
-    this.userId = localStorage.session;
-    var url = `http://localhost:5000/users/getone/${this.userId}`;
-    const res = await Axios.get(url);
-    this.user = res.data;
-
-    this.joined = moment(res.data.createdAt).fromNow();
+  mounted : async function(){
+      this.userId = localStorage.session;
+      var url = `http://localhost:5000/users/getone/${this.userId}`;
+     const res = await Axios.get(url);
+     this.user=res.data
+     console.log(this.user,"BBBBBBBBB");
+   
+    this.joined =  moment(res.data.createdAt).fromNow();
   },
   methods: {
     async editeProfile() {
       var url = `http://localhost:5000/users/update/${this.userId}`;
+      console.log(this.data,"AAAAAAAAAAAAAAAAAa")
       const res = await Axios.put(url, this.data);
       if (!JSON.stringify(res).includes("error")) {
         this.edite = false;
@@ -269,5 +253,7 @@ export default {
 
 ////////////////////////JAVA SCRIPT ///////////////////////////
 </script>
+
+<style></style>
 
 <style></style>
