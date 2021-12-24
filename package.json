@@ -4,15 +4,33 @@
   "description": "",
   "main": "index.js",
   "private": true,
-  "scripts": {
-    "vue-client": "cd ./vue-client/ && npm i && npm run serve",
-    "server-dev": "cd ./server/ && npm i && npm run server-dev",
-    "fix": "cd ./vue-client/ && npm i && npm run lint"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
- 
+  "scripts": {
+    "vue-client": "cd ./vue-client/ && npm i && npm run serve",
+    "server-dev": "cd ./server/ && npm i && npm run server-dev",
+    "fix-all": "eslint --ext .js,.vue --ignore-path .gitignore --fix . && prettier .  --write",
+    "fix": "cd ./vue-client/ && npm run lint"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.16.5",
+    "@vue/eslint-config-prettier": "^7.0.0",
+    "eslint": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-vue": "^8.2.0",
+    "lint-staged": "^12.1.3",
+    "prettier": "^2.5.1"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,jsx,vue}": [
+      "cd ./vue-client/ && npm run lint",
+      "eslint --ext .js,.vue --ignore-path .gitignore --fix .",
+      "prettier .",
+      "git add"
+    ]
   }
 }
