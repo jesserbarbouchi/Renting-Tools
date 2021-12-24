@@ -12,6 +12,7 @@ const { simplifyError } = require("../helpers/errorParser");
 const { loginParser } = require("../helpers/loginParser");
 const { gMailer } = require("../helpers/nodeMailer");
 const { whisp, yell } = require("../helpers/whisper");
+const { ping } = require("../helpers/authorizer")
 
 const createToken = (id) => {
   return jwt.sign({ id }, secret, {
@@ -23,13 +24,15 @@ const createToken = (id) => {
 module.exports = {
     signin: async (req, res, next) => {
       const { username_or_email , password } = req.body
+      
       let filter = loginParser(username_or_email.toLowerCase()) // login should always be lowercase
-
+      
       try {
         const loggedInUser = await User.login(filter, password)
 
-        const token = createToken(loggedInUser._id)
-        res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 , sameSite: true })
+        const token = ping(loggedInUser._id)
+         
+        // res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 , sameSite: true })
 
         const response = { user: loggedInUser , jwt: token }
         res.status(201).json(response)

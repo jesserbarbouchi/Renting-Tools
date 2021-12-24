@@ -1,11 +1,12 @@
-const { maxAge, secret } = require("../config/settings");
+const { secret } = require("../config/settings");
 const jwt = require("jsonwebtoken");
 const { whisp, ignore } = require("./whisper");
 
+const maxAge = 60 * 60 * 24 *3 ;
 const newAccessToken = (_id, tokenLifeTime = 1) => {
   return jwt.sign({ _id }, secret, {
     // if tokenLifeTime is null or falsy value, we set the Token's expiricy for 1 second instead of 1 day
-    expiresIn: maxAge * (tokenLifeTime ? 1 : 0) + 1,
+    expiresIn: parseInt(maxAge,10) * (tokenLifeTime ? 1 : 0) + 1,
   });
 };
 
