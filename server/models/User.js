@@ -96,10 +96,11 @@ const userSchema = mongoose.Schema(
 );
 
 // prettier-ignore
-userSchema.statics.login = async function (username, plainTextPassword) {
+userSchema.statics.login = async function (filter, plainTextPassword) {
   // instead of doing User.findOne(filter) ..., we do this.findOne(filter)
   // the "this" keyword refer to the actual model, which is the User model
   const foundUser = await this.findOne(filter);
+
   if (foundUser) {
     const success = await bcrypt.compare(plainTextPassword, foundUser.password);
     // if the compared password with the hashed one is true
