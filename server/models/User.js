@@ -16,7 +16,7 @@ const userSchema = mongoose.Schema(
     fullName: {
       type: String,
       required: [true, "Please enter your full name"],
-      validate: [isAlpha, "Please enter a valid full name"],
+      
     },
     // firstName: {
     //   type: String,
@@ -40,7 +40,7 @@ const userSchema = mongoose.Schema(
       lowercase: true,
     },
     phoneNumber: {
-      type: Number,
+      type: String,
       required: [true, "Please enter your phone number"],
       // minlength: [8, "Please enter a valid number"],
       // maxlength: [8, "Please enter a valid number"]

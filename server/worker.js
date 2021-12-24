@@ -2,7 +2,7 @@ const User = require("./models/user.js");
 const Tool = require("./models/Tool.js");
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://localhost:27017/rentingTools");
+mongoose.connect("mongodb+srv://TMxMkV8cC2gx76m4:JhBOIfKrvbiVBxz9@gfp.ih6mw.mongodb.net/RentingTools");
 let users = [
   {
     username: "Souha",
@@ -567,7 +567,7 @@ let usersdata = [
 
 // const addTools = (list) => Tool.insertMany(list);
 
-if (users && addUsers && categories) {
+if (users && addUsers ) {
   console.log();
 }
 
