@@ -4,7 +4,7 @@ const passport = require("passport");
 const AuthController = require("../controllers/auth");
 
 // http://localhost:9000/auth/signin
-router.post("/signin", AuthController.signin);
+router.post("/login", AuthController.signin);
 
 // http://localhost:9000/auth/signup
 router.post("/signup", AuthController.signup);

@@ -15,11 +15,11 @@ module.exports = {
         next();
       } catch (error) {
         // if there's an error, then redirect to login page
-        res.redirect("/auth/signin");
+        res.redirect("/auth/login");
       }
     } else {
-      res.status(401).json("you must login");
-      // res.redirect("/auth/signin");
+      // res.status(401).json("you must login");
+      res.redirect("/auth/login");
     }
   },
   checkUser: async (req, res, next) => {

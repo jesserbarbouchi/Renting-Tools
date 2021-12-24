@@ -23,33 +23,10 @@
           <div
             class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0"
           >
-            <div class="rounded-t mb-0 px-6 py-6">
-              <div class="text-center mb-3">
-                <h6 class="text-blueGray-500 text-sm font-bold">
-                  Sign up with
-                </h6>
-              </div>
-              <div class="btn-wrapper text-center">
-                <button
-                  class="bg-white active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
-                  type="button"
-                >
-                  <img alt="..." class="w-5 mr-1" :src="github" />
-                  Github
-                </button>
-                <button
-                  class="bg-white active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
-                  type="button"
-                >
-                  <img alt="..." class="w-5 mr-1" :src="google" />
-                  Google
-                </button>
-              </div>
-              <hr class="mt-6 border-b-1 border-blueGray-300" />
-            </div>
+           
             <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
               <div class="text-blueGray-400 text-center mb-3 font-bold">
-                <small>Or sign up with credentials</small>
+    
               </div>
               <form @submit.prevent="handleSubmit">
                 <div class="relative w-full mb-3">
@@ -90,7 +67,21 @@
                     Email
                   </label>
                   <input
-                    v-model="this.data.username"
+                    v-model="this.data.Email"
+                    type="text"
+                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    placeholder="Email"
+                  />
+                </div>
+                             <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlFor="grid-password"
+                  >
+                    Phone Number
+                  </label>
+                  <input
+                    v-model="this.data.phone_number"
                     type="text"
                     class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     placeholder="Email"
@@ -105,6 +96,7 @@
                     Password
                   </label>
                   <input
+                   v-model="this.data.password"
                     type="password"
                     class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     placeholder="Password"
@@ -131,6 +123,7 @@
                   <button
                     class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                     type="button"
+                    @click="handleSubmit"
                   >
                     Create Account
                   </button>
@@ -173,19 +166,20 @@ export default {
       });
     },
     handleSubmit() {
+      console.log("hello")
       var data = this.data;
-      console.log("data", data);
+      console.log("data", this.data);
       Axios.post("http://localhost:5000/users/signup", data)
         .then((response) => {
           console.log("response", response.config.data);
         })
         .then(() => {
-          this.sendMail();
+             
         })
         .catch((error) => {
           console.log("this is an error", error);
         });
-      this.$router.push("/login");
+      // this.$router.push("/login");
     },
     //     fetchData(){
     //              var data ={

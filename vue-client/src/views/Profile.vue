@@ -111,31 +111,17 @@
             class="block text-gray-700 text-sm font-bold mb-2"
             for="First Name"
           >
-            First Name
+            full name
           </label>
           <input
-            v-model="this.data.username"
+            v-model="this.data.fullname"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="username"
             type="text"
             placeholder="Last Name"
           />
         </div>
-        <div class="mb-6">
-          <label
-            class="block text-gray-700 text-sm font-bold mb-2"
-            for="password"
-          >
-            Last Name
-          </label>
-          <input
-            v-model="this.data.lastname"
-            class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-            id="password"
-            type="Email"
-            placeholder="Email"
-          />
-        </div>
+
         <div class="mb-6">
           <label
             class="block text-gray-700 text-sm font-bold mb-2"
@@ -220,10 +206,9 @@ export default {
   name: "profile",
   data() {
     return {
-      user:{fullname:"",email:"",phone_number:"",profile_image_uri:"",address:""},
+      user:{},
       data: {
-        username: "",
-        lastname: "",
+        fullname: "",
         Email: "",
         phone_number: "",
         address: "",
@@ -241,13 +226,15 @@ export default {
       this.userId = localStorage.session;
       var url = `http://localhost:5000/users/getone/${this.userId}`;
      const res = await Axios.get(url);
-    this.user=res.data
+     this.user=res.data
+     console.log(this.user,"BBBBBBBBB");
    
     this.joined =  moment(res.data.createdAt).fromNow();
   },
   methods: {
     async editeProfile() {
       var url = `http://localhost:5000/users/update/${this.userId}`;
+      console.log(this.data,"AAAAAAAAAAAAAAAAAa")
       const res = await Axios.put(url, this.data);
       if (!JSON.stringify(res).includes("error")) {
         this.edite = false;

@@ -36,7 +36,7 @@
               <div class="text-blueGray-400 text-center mb-3 font-bold">
                 <small>Or sign in with credentials</small>
               </div>
-              <form>
+              <form @submit.prevent="handleSubmit">
                 <div class="relative w-full mb-3">
                   <label
                     class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
@@ -45,6 +45,7 @@
                     Email
                   </label>
                   <input
+                  v-model="email"
                     type="email"
                     class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     placeholder="Email"
@@ -59,23 +60,13 @@
                     Password
                   </label>
                   <input
+                  v-model="password"
                     type="password"
                     class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     placeholder="Password"
                   />
                 </div>
-                <div>
-                  <label class="inline-flex items-center cursor-pointer">
-                    <input
-                      id="customCheckLogin"
-                      type="checkbox"
-                      class="form-checkbox border-0 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150"
-                    />
-                    <span class="ml-2 text-sm font-semibold text-blueGray-600">
-                      Remember me
-                    </span>
-                  </label>
-                </div>
+
 
                 <div class="text-center mt-6">
                   <button
