@@ -45,7 +45,7 @@
                     Email
                   </label>
                   <input
-                  v-model="email"
+                  v-model="username_or_email"
                     type="email"
                     class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     placeholder="Email"
@@ -70,6 +70,7 @@
 
                 <div class="text-center mt-6">
                   <button
+                  @click="handleSubmit"
                     class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                     type="button"
                   >
@@ -110,12 +111,12 @@ export default {
   methods: {
     async handleSubmit() {
       var data = {
-        email: this.email,
+        username_or_email: this.username_or_email,
         password: this.password,
       };
       console.log("clog login data", data);
       var response = await Axios.post(
-        "http://localhost:5000/users/login",
+        "http://localhost:5000/auth/login",
         data
       );
       console.log("response", response);

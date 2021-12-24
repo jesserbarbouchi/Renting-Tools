@@ -16,7 +16,7 @@ const userSchema = mongoose.Schema(
     fullName: {
       type: String,
       required: [true, "Please enter your full name"],
-      validate: [isAlpha, "Please enter a valid full name"],
+      
     },
     // firstName: {
     //   type: String,
@@ -40,7 +40,7 @@ const userSchema = mongoose.Schema(
       lowercase: true,
     },
     phoneNumber: {
-      type: Number,
+      type: String,
       required: [true, "Please enter your phone number"],
       // minlength: [8, "Please enter a valid number"],
       // maxlength: [8, "Please enter a valid number"]
@@ -96,10 +96,11 @@ const userSchema = mongoose.Schema(
 );
 
 // prettier-ignore
-userSchema.statics.login = async function (username, plainTextPassword) {
+userSchema.statics.login = async function (filter, plainTextPassword) {
   // instead of doing User.findOne(filter) ..., we do this.findOne(filter)
   // the "this" keyword refer to the actual model, which is the User model
   const foundUser = await this.findOne(filter);
+
   if (foundUser) {
     const success = await bcrypt.compare(plainTextPassword, foundUser.password);
     // if the compared password with the hashed one is true
